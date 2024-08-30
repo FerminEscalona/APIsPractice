@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>search Cocktail</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
 </head>
 <body>
     <div class="wrap-searchbar">
-        <H1>Busca tu coctel!</H1>
         <div id="searchbar">
-            <input type="text" id="buscar" placeholder="buscar" class="buscar-input">
-            <button onclick="buscar()" class="buscar-button">buscar</button>
+            <input type="text" id="buscar" placeholder="busca tu coctel" class="buscar-input">
+            <button id="buscar-button">buscar</button>
         </div>
         <div class="loader">
             <div class="circle"></div>
@@ -19,18 +19,7 @@
             <div class="circle"></div>
             <div class="circle"></div>
         </div>
-    </div>
-    <div class="wrap-product">
-        <div class="imgCocktail"></div>
-        <div class="wrapList">
-            <ul>
-                <li>ID: <span id="id"></span></li>
-                <li>Nombre: <span id="name"></span></li>
-                <li>Categoria: <span id="categoria"></span></li>
-                <li>Ingredientes: <span id="ingredientes"></span></li>
-                <li>instrucciones</li>
-            </ul>
-        </div>
+        <div id="wrap-result"></div>
     </div>
 </body>
 </html>
