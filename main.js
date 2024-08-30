@@ -53,6 +53,9 @@ let getInfo = () => {
         });
     }
 };
-window.addEventListener("load",getInfo)
+window.addEventListener("load", () => {
+    document.getElementById("buscar").value = "";
+    getInfo();
+});
 buscarbtn.addEventListener("click", getInfo);
 
