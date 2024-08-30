@@ -19,7 +19,6 @@ let getRandom = () => {
     });
 };
 let displayDrinks = (tragos, input) => {
-
     if (input != "") {
         let contador = 1;
         let ingredientes = [];
@@ -56,11 +55,12 @@ let displayDrinks = (tragos, input) => {
             li.innerHTML = ingrediente;
             ingredientesUL.appendChild(li);
         });
+    }else{
+        resultado.innerHTML = `<h3>Ingrese un trago valido...</h3>`;
     }
 };
 window.addEventListener("load", () => {
     document.getElementById("buscar").value = "";
-    getInfo();
 });
 buscarbtn.addEventListener("click", getInfo);
 randombtn.addEventListener("click", getRandom);
