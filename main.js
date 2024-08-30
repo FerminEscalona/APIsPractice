@@ -1,7 +1,22 @@
 let resultado = document.getElementById("wrap-result");
 let buscarbtn = document.getElementById("buscar-button");
-let favbtn = document.getElementById("favoritos-butto");
+let favbtn = document.getElementById("favoritos");
+let fav = document.getElementById("wrap-fav");
 let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s="
+
+let tragos
+/*hay que desactivar el boton de mostrar favoritos hasta que exista al menos un elemento seleccionado como favorito
+function showfav() {
+    console.log("click");
+    favbtn.style.color = "yellow";
+
+
+    fav.innerHTML = `      
+                <h2>${tragos.strDrink}</h2>
+                <h3>ID: ${tragos.idDrink}</h3>
+            `;
+}
+*/
 
 let getInfo = () => {
 
@@ -16,7 +31,7 @@ let getInfo = () => {
                 console.log(data.drinks[0]);
 
                 let tragos = data.drinks[0];
-                
+
                 console.log(tragos.idDrink);
                 console.log(tragos.strDrink);
                 console.log(tragos.strCategory);
@@ -25,7 +40,7 @@ let getInfo = () => {
 
                 let contador = 1;
                 let ingredientes = [];
-                
+
                 for (let i in tragos) {
 
                     let ingrediente = "";
@@ -63,6 +78,7 @@ let getInfo = () => {
                     li.innerHTML = ingrediente;
                     ingredientesUL.appendChild(li);
                 });
+                
             });
     }
 };

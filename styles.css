@@ -24,6 +24,31 @@ body{
     height: 100vh;
     background-color: #000000;
 }
+/* aside para los favoritos hay que arreglar estilos */
+.menuFavoritos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    background-color: #008000;
+    color: white;
+    font-size: 1.2em;
+} 
+#wrap-fav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
 .wrap-searchbar{
     position: absolute;
     transform: translate(-50%, -50%);
@@ -63,17 +88,13 @@ body{
     color: white;
 }
 
-#searchbar #favoritos-button{
+#searchbar #favoritos{
     font-size: 1em;
     border-radius: 2em;
-    background-color: #008000;  ;
+    background-color: #008000;  
     border: none;
     outline: none;
     color: white;
-}
-
-#searchbar #favoritos-button :first-child:active{
-    background-color: #008000;
 }
 
 #wrap-result img{
