@@ -1,3 +1,11 @@
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
 *{
     padding: 0;
     margin: 0;
@@ -22,7 +30,7 @@ body{
 }
 #searchbar{
     display: grid;
-    grid-template-columns: 9fr 3fr;
+    grid-template-columns: 7fr 2fr 2fr;
     gap: 1em;
     margin-bottom: 1.2em;
 }
@@ -37,6 +45,7 @@ body{
 #searchbar #buscar{
     border-color: #5372f0;
 }
+
 #searchbar #buscar-button{
     font-size: 1em;
     border-radius: 2em;
@@ -45,6 +54,15 @@ body{
     outline: none;
     color: white;
 }
+
+#searchbar #favoritos-button{
+    font-size: 1em;
+    border-radius: 2em;
+    border: none;
+    outline: none;
+    color: white;
+}
+
 #wrap-result img{
     display: block;
     max-width: 12.5em;
