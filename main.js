@@ -1,5 +1,6 @@
 let resultado = document.getElementById("wrap-result");
 let buscarbtn = document.getElementById("buscar-button");
+let favbtn = document.getElementById("favoritos-butto");
 let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s="
 
 let getInfo = () => {
