@@ -1,12 +1,17 @@
+const loadingElement = document.getElementById('loading');
 let resultado = document.getElementById("wrap-result");
 let buscarbtn = document.getElementById("buscar-button");
 let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s="
+loadingElement.style.display = 'none';
 let getInfo = () => {
     let input = document.getElementById("buscar").value;
     if (input != "") {
+        loadingElement.style.display = 'flex';
         fetch(url + input)
         .then((response) => response.json())
         .then((data) => {
+            loadingElement.style.display = 'none';
+            resultado.innerHTML = '';
             console.log(data);
             console.log(data.drinks[0]);
             let tragos = data.drinks[0];
@@ -55,7 +60,6 @@ let getInfo = () => {
 };
 window.addEventListener("load", () => {
     document.getElementById("buscar").value = "";
-    getInfo();
 });
 buscarbtn.addEventListener("click", getInfo);
 
