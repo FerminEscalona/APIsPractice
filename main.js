@@ -5,6 +5,8 @@ let Afavoritos = document.getElementById("Afavoritos");
 let fav = document.getElementById("wrap-fav");
 const menuFavoritos = document.querySelector('.menuFavoritos');
 let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s="
+let randombtn = document.getElementById("random-button");
+let randomUrl = "https://thecocktaildb.com/api/json/v1/1/random.php"
 let tragosFavoritos = [];
 let contadorClic = 0;
 let contadorClicA = 0;
@@ -60,11 +62,22 @@ function agregarFav(dato) {
         console.log("Este trago ya esta en tus favoritos");
     }
 }
-
 let getInfo = () => {
-
     let input = document.getElementById("buscar").value;
-
+    fetch(url + input)
+    .then((response) => response.json())
+    .then((data) => {
+        displayDrinks(data.drinks[0], input);
+    });
+};
+let getRandom = () => {
+    fetch(randomUrl)
+    .then((response) => response.json())
+    .then((data) => {
+        displayDrinks(data.drinks[0]);
+    });
+};
+let displayDrinks = (tragos, input) => {
     if (input != "") {
         fetch(url + input)
             .then((response) => response.json())
@@ -83,7 +96,6 @@ let getInfo = () => {
 
                 let contador = 1;
                 let ingredientes = [];
-
                 for (let i in tragos) {
 
                     let ingrediente = "";
@@ -129,15 +141,14 @@ let getInfo = () => {
                     li.innerHTML = ingrediente;
                     ingredientesUL.appendChild(li);
                 });
-
-            });
+          }else{
+        resultado.innerHTML = `<h3>Ingrese un trago valido...</h3>`;
+        }
+      });
     }
 };
-
 window.addEventListener("load", () => {
     document.getElementById("buscar").value = "";
-    getInfo();
 });
-
 buscarbtn.addEventListener("click", getInfo);
-
+randombtn.addEventListener("click", getRandom);
