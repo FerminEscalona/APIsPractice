@@ -141,12 +141,11 @@ let displayDrinks = (tragos, input) => {
                     li.innerHTML = ingrediente;
                     ingredientesUL.appendChild(li);
                 });
-          }else{
+         });
+      }else{
         resultado.innerHTML = `<h3>Ingrese un trago valido...</h3>`;
         }
-      });
-    }
-};
+    };
 window.addEventListener("load", () => {
     document.getElementById("buscar").value = "";
 });
