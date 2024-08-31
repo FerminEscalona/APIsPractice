@@ -2,16 +2,15 @@ const loadingElement = document.getElementById('loading');
 let resultado = document.getElementById("wrap-result");
 let buscarbtn = document.getElementById("buscar-button");
 let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s="
-loadingElement.style.display = 'none';
+loadingElement.classList.add("oculto");
 let getInfo = () => {
     let input = document.getElementById("buscar").value;
     if (input != "") {
-        loadingElement.style.display = 'flex';
+        loadingElement.classList.remove("oculto");
         fetch(url + input)
         .then((response) => response.json())
         .then((data) => {
-            loadingElement.style.display = 'none';
-            resultado.innerHTML = '';
+            loadingElement.classList.add("oculto");
             console.log(data);
             console.log(data.drinks[0]);
             let tragos = data.drinks[0];

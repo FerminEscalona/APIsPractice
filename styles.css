@@ -73,6 +73,23 @@ body{
     left: 42.5%;
     bottom: -0.3em;
 }
+#loading{
+    position: absolute;
+    display: flex;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left:50%;
+    width: 10vw;
+    max-width: 35.7em;
+    background-color: none;
+    padding: 1.8em;
+    border-radius: 0.6em;
+    box-shadow: none;
+
+}
+#loading.oculto {
+    display: none;
+  }
 /* From Uiverse.io by G4b413l */ 
 .three-body {
     --uib-size: 35px;
