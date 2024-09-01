@@ -41,7 +41,7 @@ tragosFavoritos.forEach((trago) => {
             //Aqui pueden manejar como quieran la informacion de la bebida no pude ponerla por pantalla
             console.log("El nombre de la bebida es: " + bebida.strDrink);
             console.log("El id de la bebida es: " + bebida.idDrink);
-            fav.innerHTML = `      
+            fav.innerHTML += `      
                 <h2 id="nombreFav">${bebida.strDrink}</h2>
                 <h3 id="idFav">ID: ${bebida.idDrink}</h3>
             `;
