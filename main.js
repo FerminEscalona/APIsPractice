@@ -1,3 +1,4 @@
+const loadingElement = document.getElementById('loading');
 let resultado = document.getElementById("wrap-result");
 let buscarbtn = document.getElementById("buscar-button");
 let favbtn = document.getElementById("favoritos");
@@ -10,6 +11,7 @@ let randomUrl = "https://thecocktaildb.com/api/json/v1/1/random.php"
 let tragosFavoritos = [];
 let contadorClic = 0;
 let contadorClicA = 0;
+loadingElement.classList.add("oculto");
 
 function showfav(tragosFavoritos) {
     if (contadorClic == 0) {
@@ -67,6 +69,7 @@ let getInfo = () => {
     fetch(url + input)
     .then((response) => response.json())
     .then((data) => {
+        loadingElement.classList.remove("oculto");
         displayDrinks(data.drinks[0], input);
     });
 };
@@ -74,12 +77,14 @@ let getRandom = () => {
     fetch(randomUrl)
     .then((response) => response.json())
     .then((data) => {
+        loadingElement.classList.remove("oculto");
         displayDrinks(data.drinks[0]);
         document.getElementById("buscar").value = "";
     });
 };
 let displayDrinks = (tragos, input) => {
     if (input != "") {
+        loadingElement.classList.add("oculto");
         let contador = 1;
         let ingredientes = [];
         for (let i in tragos) {
