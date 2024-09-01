@@ -65,19 +65,19 @@ function agregarFav(dato) {
     }
 }
 let getInfo = () => {
+    loadingElement.classList.remove("oculto");
     let input = document.getElementById("buscar").value;
     fetch(url + input)
     .then((response) => response.json())
     .then((data) => {
-        loadingElement.classList.remove("oculto");
         displayDrinks(data.drinks[0], input);
     });
 };
 let getRandom = () => {
+    loadingElement.classList.remove("oculto");
     fetch(randomUrl)
     .then((response) => response.json())
     .then((data) => {
-        loadingElement.classList.remove("oculto");
         displayDrinks(data.drinks[0]);
         document.getElementById("buscar").value = "";
     });
