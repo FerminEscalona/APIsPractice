@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
+
+<!--El icono se hace copiando el link desde google fonts(ya esta no es necesario) y luego copia el estilo en el #css y por ultimo copia el span del icono dentro del boton al que se lo quiere poner-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>search Cocktail</title>
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
+
 <body>
+    <div class="menuFavoritos" hidden>
+        <div id="wrap-fav">
+
+        </div>
+    </div>
     <div class="wrap-searchbar">
         <div id="searchbar">
-            <input type="text" id="buscar" placeholder="busca tu coctel" class="buscar-input">
-            <button id="buscar-button">buscar</button>
+            <input type="text" id="buscar" placeholder="Busca tu coctel" class="buscar-input">
+            <button id="buscar-button">
+                <span class="material-symbols-outlined">
+                    search
+                </span></button>
+            <button id="random-button">Random</button>
+            <button id="favoritos" onclick="showfav(tragosFavoritos)">
+                <span class="material-symbols-outlined">
+                    star
+                </span></button>
         </div>
         <div id="loading">
             <div class="three-body">
@@ -23,4 +42,5 @@
         <div id="wrap-result"></div>
     </div>
 </body>
+
 </html>
