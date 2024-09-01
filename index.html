@@ -14,32 +14,34 @@
 </head>
 
 <body>
-    <div class="menuFavoritos" hidden>
-        <div id="wrap-fav">
-
+    <div class="parent">
+        <div class="wrap-searchbar">
+            <div id="searchbar">
+                <input type="text" id="buscar" placeholder="Busca tu coctel" class="buscar-input">
+                <button id="buscar-button">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span></button>
+                <button id="random-button">Random</button>
+                <button id="favoritos" onclick="showfav(tragosFavoritos)">
+                    <span class="material-symbols-outlined">
+                        star
+                    </span></button>
+            </div>
+            <div id="loading">
+                <div class="three-body">
+                    <div class="three-body__dot"></div>
+                    <div class="three-body__dot"></div>
+                    <div class="three-body__dot"></div>
+                </div>
+            </div>
+            <div id="wrap-result"></div>
         </div>
-    </div>
-    <div class="wrap-searchbar">
-        <div id="searchbar">
-            <input type="text" id="buscar" placeholder="Busca tu coctel" class="buscar-input">
-            <button id="buscar-button">
-                <span class="material-symbols-outlined">
-                    search
-                </span></button>
-            <button id="random-button">Random</button>
-            <button id="favoritos" onclick="showfav(tragosFavoritos)">
-                <span class="material-symbols-outlined">
-                    star
-                </span></button>
-        </div>
-        <div id="loading">
-            <div class="three-body">
-                <div class="three-body__dot"></div>
-                <div class="three-body__dot"></div>
-                <div class="three-body__dot"></div>
+        <div class="menuFavoritos" hidden>
+            <div id="wrap-fav">
+    
             </div>
         </div>
-        <div id="wrap-result"></div>
     </div>
 </body>
 
