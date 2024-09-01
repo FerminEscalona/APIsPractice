@@ -323,7 +323,7 @@ body{
     width: 90%;
     height: 20px;
 }
-@media (max-width: 1950px) {
+@media (max-width: 1600px) {
     .parent {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
