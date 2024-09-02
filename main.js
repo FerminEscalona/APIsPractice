@@ -88,9 +88,14 @@ let getRandom = () => {
     fetch(randomUrl)
         .then((response) => response.json())
         .then((data) => {
-            displayDrinks(data.drinks[0]);
-            document.getElementById("buscar").value = "";
-        });
+            const image = new Image();
+            image.src = data.drinks[0].strDrinkThumb; // Assuming this is the image URL
+            image.onload = () => {
+                displayDrinks(data.drinks[0]);
+                document.getElementById("buscar").value = "";
+                loadingElement.classList.add("oculto");
+        };
+    });
 };
 let displayDrinks = (tragos, input) => {
     if (input != "") {
