@@ -5,9 +5,9 @@ let favbtn = document.getElementById("favoritos");
 let Afavoritos = document.getElementById("Afavoritos");
 let fav = document.getElementById("wrap-fav");
 const menuFavoritos = document.querySelector('.menuFavoritos');
-let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s="
+let url = "https://thecocktaildb.com/api/json/v1/1/search.php?s=";
 let randombtn = document.getElementById("random-button");
-let randomUrl = "https://thecocktaildb.com/api/json/v1/1/random.php"
+let randomUrl = "https://thecocktaildb.com/api/json/v1/1/random.php";
 let tragosFavoritos = [];
 let contadorClic = 0;
 let contadorClicA = 0;
@@ -33,18 +33,31 @@ function showfav(tragosFavoritos) {
     }
 
     console.log("Se abrio tragos favoritos");
+}
+
+function agregarFav(dato) {
+    if (!tragosFavoritos.includes(dato)) {
+        tragosFavoritos.push(dato);
+        console.log("Se agrego el trago a favoritos");
+        console.log("Los tragos favoritos son: " + tragosFavoritos);
+    } else {
+        console.log("Este trago ya esta en tus favoritos");
+    }
 
     tragosFavoritos.forEach((trago) => {
         fetch(url + trago)
             .then((response) => response.json())
             .then((data) => {
                 let bebida = data.drinks[0];
+                console.log(bebida);
 
                 if (!idsBebidasAgregadas.has(bebida.idDrink)) {
-                    
+                    // Escapar las comillas para que el objeto JSON se pase como cadena de texto
                     fav.innerHTML += `
-                        <h2 id="nombreFav">${bebida.strDrink}</h2>
-                        <h3 id="idFav">ID: ${bebida.idDrink}</h3>
+                        <button id="${bebida.idDrink}" class="mostrarFav" onclick='displayDrinks(${JSON.stringify(bebida)})'>
+                            <h2 id="nombreFav">${bebida.strDrink}</h2>
+                            <h3 id="idFav">ID: ${bebida.idDrink}</h3>
+                        </button>
                     `;
 
                     idsBebidasAgregadas.add(bebida.idDrink);
@@ -64,48 +77,51 @@ function showfav(tragosFavoritos) {
     });
 }
 
-
-function agregarFav(dato) {
-    if (!tragosFavoritos.includes(dato)) {
-        tragosFavoritos.push(dato);
-        console.log("Se agrego el trago a favoritos");
-        console.log("Los tragos favoritos son: " + tragosFavoritos);
-    } else {
-        console.log("Este trago ya esta en tus favoritos");
-    }
-}
 let getInfo = () => {
     loadingElement.classList.remove("oculto");
     let input = document.getElementById("buscar").value;
     fetch(url + input)
         .then((response) => response.json())
         .then((data) => {
-            displayDrinks(data.drinks[0], input);
+            displayDrinks(data.drinks[0]); // Pasa directamente el objeto de bebida
+        })
+        .catch((error) => {
+            console.log("Error al buscar el trago: ", error);
+            resultado.innerHTML = "No se encontró el trago. Intenta con otro nombre.";
         });
 };
+
 let getRandom = () => {
     loadingElement.classList.remove("oculto");
     fetch(randomUrl)
         .then((response) => response.json())
         .then((data) => {
-            displayDrinks(data.drinks[0]);
+            displayDrinks(data.drinks[0]); // Pasa directamente el objeto de bebida
             document.getElementById("buscar").value = "";
+        })
+        .catch((error) => {
+            console.log("Error al obtener trago aleatorio: ", error);
+            resultado.innerHTML = "Error al obtener un trago aleatorio.";
         });
 };
-let displayDrinks = (tragos, input) => {
-    if (input != "") {
+
+let displayDrinks = (tragos, input = "") => {
+    // Verifica si el argumento es un objeto ya convertido o una cadena JSON
+    let bebida = typeof tragos === "string" ? JSON.parse(tragos) : tragos;
+
+    if (bebida) {
         loadingElement.classList.add("oculto");
         let contador = 1;
         let ingredientes = [];
-        for (let i in tragos) {
 
+        for (let i in bebida) {
             let ingrediente = "";
             let medida = "";
 
-            if (i.startsWith("strIngredient") && tragos[i]) {
-                ingrediente = tragos[i];
-                if (tragos["strMeasure" + contador]) {
-                    medida = tragos["strMeasure" + contador];
+            if (i.startsWith("strIngredient") && bebida[i]) {
+                ingrediente = bebida[i];
+                if (bebida["strMeasure" + contador]) {
+                    medida = bebida["strMeasure" + contador];
                     contador++;
                 } else {
                     medida = "";
@@ -116,26 +132,24 @@ let displayDrinks = (tragos, input) => {
         }
 
         console.log(ingredientes);
-
-        console.log(tragos.strDrink);
+        console.log(bebida.strDrink);
 
         resultado.innerHTML = `
-        <img src= ${tragos.strDrinkThumb}>
-        <h2>${tragos.strDrink} 
-        <button id="Afavoritos" onclick="agregarFav('${tragos.strDrink}')">
-            <span class="material-symbols-outlined">
-                star
-            </span>
+        <img src=${bebida.strDrinkThumb}>
+        <h2>${bebida.strDrink} 
+        <button id="Afavoritos" onclick="agregarFav('${bebida.strDrink}')">
+            <span class="material-symbols-outlined">star</span>
         </button>
         </h2>
-        <h3>ID: ${tragos.idDrink}</h3>
+        <h3>ID: ${bebida.idDrink}</h3>
         <h3>Categoria: </h3>
-        <p>${tragos.strCategory}</p>
+        <p>${bebida.strCategory}</p>
         <h3>Ingredientes:</h3>
-        <ul class = "ingredientes"></ul>
+        <ul class="ingredientes"></ul>
         <h3>Instrucciones:</h3>
-        <p>${tragos.strInstructions}</p>
+        <p>${bebida.strInstructions}</p>
         `;
+        
         let ingredientesUL = document.querySelector(".ingredientes");
         ingredientes.forEach((ingrediente) => {
             let li = document.createElement("li");
@@ -146,8 +160,10 @@ let displayDrinks = (tragos, input) => {
         resultado.innerHTML = "Indique una bebida para buscar...";
     }
 };
+
 window.addEventListener("load", () => {
     document.getElementById("buscar").value = "";
 });
+
 buscarbtn.addEventListener("click", getInfo);
 randombtn.addEventListener("click", getRandom);
