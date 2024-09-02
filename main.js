@@ -12,48 +12,58 @@ let tragosFavoritos = [];
 let contadorClic = 0;
 let contadorClicA = 0;
 loadingElement.classList.add("oculto");
+const idsBebidasAgregadas = new Set();
 
 function showfav(tragosFavoritos) {
     if (contadorClic == 0) {
         favbtn.style.color = "yellow";
         contadorClic++;
         console.log("contadorClic: " + contadorClic);
-    }else if (contadorClic == 1) {
+    } else if (contadorClic == 1) {
         favbtn.style.color = "white";
         contadorClic--;
         console.log("contadorClic: " + contadorClic);
         console.log("Se cerro tragos favoritos");
     }
-    
+
     if (menuFavoritos.hasAttribute('hidden')) {
-        menuFavoritos.removeAttribute('hidden'); 
+        menuFavoritos.removeAttribute('hidden');
     } else {
-        menuFavoritos.setAttribute('hidden', ''); 
+        menuFavoritos.setAttribute('hidden', '');
     }
-    
+
     console.log("Se abrio tragos favoritos");
-    
-tragosFavoritos.forEach((trago) => {
-    fetch(url + trago)
-        .then((response) => response.json())
-        .then((data) => {
-            let bebida = data.drinks[0];
-            //Aqui pueden manejar como quieran la informacion de la bebida no pude ponerla por pantalla
-            console.log("El nombre de la bebida es: " + bebida.strDrink);
-            console.log("El id de la bebida es: " + bebida.idDrink);
-            fav.innerHTML += `      
-                <h2 id="nombreFav">${bebida.strDrink}</h2>
-                <h3 id="idFav">ID: ${bebida.idDrink}</h3>
-            `;
-        })
-        .catch(error => {
-            console.log("error");
-            fav.innerHTML = `
-                <h2 id="nombreFav">Carrito vacio</h2>
-            `;
-        });
+
+    tragosFavoritos.forEach((trago) => {
+        fetch(url + trago)
+            .then((response) => response.json())
+            .then((data) => {
+                let bebida = data.drinks[0];
+
+                if (!idsBebidasAgregadas.has(bebida.idDrink)) {
+                    
+                    fav.innerHTML += `
+                        <h2 id="nombreFav">${bebida.strDrink}</h2>
+                        <h3 id="idFav">ID: ${bebida.idDrink}</h3>
+                    `;
+
+                    idsBebidasAgregadas.add(bebida.idDrink);
+
+                    console.log("El nombre de la bebida es: " + bebida.strDrink);
+                    console.log("El id de la bebida es: " + bebida.idDrink);
+                } else {
+                    console.log("La bebida ya fue añadida previamente: " + bebida.strDrink);
+                }
+            })
+            .catch(error => {
+                console.log("error");
+                fav.innerHTML = `
+                    <h2 id="nombreFav">Carrito vacio</h2>
+                `;
+            });
     });
 }
+
 
 function agregarFav(dato) {
     if (!tragosFavoritos.includes(dato)) {
@@ -68,10 +78,10 @@ let getInfo = () => {
     loadingElement.classList.remove("oculto");
     let input = document.getElementById("buscar").value;
     fetch(url + input)
-    .then((response) => response.json())
-    .then((data) => {
-        displayDrinks(data.drinks[0], input);
-    });
+        .then((response) => response.json())
+        .then((data) => {
+            displayDrinks(data.drinks[0], input);
+        });
 };
 let getRandom = () => {
     loadingElement.classList.remove("oculto");
@@ -97,7 +107,7 @@ let displayDrinks = (tragos, input) => {
             let ingrediente = "";
             let medida = "";
 
-            if (i.startsWith("strIngredient") && tragos[i])      {
+            if (i.startsWith("strIngredient") && tragos[i]) {
                 ingrediente = tragos[i];
                 if (tragos["strMeasure" + contador]) {
                     medida = tragos["strMeasure" + contador];
@@ -137,7 +147,7 @@ let displayDrinks = (tragos, input) => {
             li.innerHTML = ingrediente;
             ingredientesUL.appendChild(li);
         });
-    }else{
+    } else {
         resultado.innerHTML = "Indique una bebida para buscar...";
     }
 };
