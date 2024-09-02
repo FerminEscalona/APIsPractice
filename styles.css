@@ -82,7 +82,7 @@ body{
 .menuFavoritos { 
     grid-column:2;
     position: relative;
-    background-color: green;
+    background-color: white;
     color: white;
     padding: 0;
     width: 100%;
