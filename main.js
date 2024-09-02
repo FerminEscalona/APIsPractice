@@ -103,8 +103,14 @@ let getRandom = () => {
             console.log("Error al obtener trago aleatorio: ", error);
             resultado.innerHTML = "Error al obtener un trago aleatorio.";
         });
+            const image = new Image();
+            image.src = data.drinks[0].strDrinkThumb;
+            image.onload = () => {
+                displayDrinks(data.drinks[0]);
+                document.getElementById("buscar").value = "";
+                loadingElement.classList.add("oculto");
+        };
 };
-
 let displayDrinks = (tragos, input = "") => {
     // Verifica si el argumento es un objeto ya convertido o una cadena JSON
     let bebida = typeof tragos === "string" ? JSON.parse(tragos) : tragos;
