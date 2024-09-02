@@ -89,7 +89,7 @@ let getRandom = () => {
         .then((response) => response.json())
         .then((data) => {
             const image = new Image();
-            image.src = data.drinks[0].strDrinkThumb; // Assuming this is the image URL
+            image.src = data.drinks[0].strDrinkThumb;
             image.onload = () => {
                 displayDrinks(data.drinks[0]);
                 document.getElementById("buscar").value = "";
