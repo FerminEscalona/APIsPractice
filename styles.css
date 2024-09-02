@@ -26,6 +26,8 @@ body{
     margin: 0;
 }
 .parent {
+    background: url(cocktail-drinks-6950673.jpg);
+    background-size: cover;
     display: grid;
     grid-template-columns: 70% 30%;
     grid-template-rows: 1fr;
@@ -46,7 +48,7 @@ body{
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: auto;
     background-color: white;
     /*display: none;*/
     justify-content: center;
@@ -89,9 +91,10 @@ body{
 }
 #searchbar {
     display: grid;
-    grid-template-columns: 6fr 2fr 2fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1em;
     margin-bottom: 1.2em;
+    width: 100%;
 }
 
 #searchbar #buscar {
@@ -147,6 +150,9 @@ body{
 #wrap-result {
     color: #575a7b;
     line-height: 2em;
+    overflow-y: auto;
+    max-height: 50vh;
+    width: 100%;
 }
 
 #wrap-result h2 {
@@ -349,9 +355,8 @@ body{
         top: 50%;
         left: 50%;
         width: 90vw;
-        height: 45vh;
+        height: auto; 
         max-width: 35.7em;
-        background-color: white;
         padding: 1.8em;
         margin: 0;
         border-radius: 0.6em;
@@ -364,8 +369,9 @@ body{
         transform: translate(-50%, -50%);
         top: 50%;
         left: 50%;
-        width: 90vw;
-        height: 30vh;
-        max-width: 35.7em;
+        width: 45vw;
+        height: 90%; 
+        border-radius: 0.6em;
+        overflow-y: auto;
     }
 }
