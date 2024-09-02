@@ -14,7 +14,9 @@ let contadorClicA = 0;
 loadingElement.classList.add("oculto");
 const idsBebidasAgregadas = new Set();
 
-function showfav(tragosFavoritos) {
+function showfav() {
+    let tragosFavoritosRecuperados = JSON.parse(localStorage.getItem('tragosFavoritos') || '[]');
+    tragosFavoritos = tragosFavoritosRecuperados;
     if (contadorClic == 0) {
         favbtn.style.color = "yellow";
         contadorClic++;
@@ -40,6 +42,8 @@ function agregarFav(dato) {
         tragosFavoritos.push(dato);
         console.log("Se agrego el trago a favoritos");
         console.log("Los tragos favoritos son: " + tragosFavoritos);
+        // Guardar el arreglo en localStorage
+        localStorage.setItem('tragosFavoritos', JSON.stringify(tragosFavoritos));
     } else {
         console.log("Este trago ya esta en tus favoritos");
     }
