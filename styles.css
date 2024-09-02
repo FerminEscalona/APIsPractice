@@ -375,3 +375,26 @@ body{
         overflow-y: auto;
     }
 }
+@media (max-width: 800px) {
+    #searchbar {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr;
+        gap: 1em;
+    }
+    #searchbar #buscar {
+        grid-column: 1/4;
+        grid-row: 1;
+    }
+    #searchbar #buscar-button, #searchbar #random-button, #searchbar #favoritos {
+        grid-row: 2;
+    }
+    #searchbar #buscar-button {
+        grid-column: 1;
+    }
+    #searchbar #random-button {
+        grid-column: 2;
+    }
+    #searchbar #favoritos {
+        grid-column: 3;
+    }
+}
